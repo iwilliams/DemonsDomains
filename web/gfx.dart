@@ -1,6 +1,8 @@
 import 'package:malison/malison.dart';
 import 'dart:html' as html;
 import 'dart:math';
+import 'dart:async';
+import 'dart:collection';
 
 class Gfx {
 
@@ -13,20 +15,18 @@ class Gfx {
     html.document.body.children.add(_canvas);
 
     html.window.onClick.listen((event) => _canvas.requestFullscreen());
-
+    
 
     // Create a new terminal. CanvasTerminal uses your browser's fonts.
     // RetroTerminal uses a built in DOS-style Code Page 437 font.
     _terminal = new RetroTerminal.shortDos(width, height, this._canvas);
-
-
+    
     // Position in dom
     _canvas.style.top = '50%';
     _canvas.style.left = '50%';
     _canvas.style.position = 'absolute';
     _canvas.style.marginLeft = (0 - _canvas.clientWidth / 2).toString() + "px";
     _canvas.style.marginTop = (0 - _canvas.clientHeight / 2).toString() + "px";
-
 
   }
 
@@ -108,6 +108,40 @@ class Gfx {
     drawEdge(new _Edge(new Point(x2, y2), new Point(x3, y3)));
     drawEdge(new _Edge(new Point(x3, y3), new Point(x4, y4)));
     drawEdge(new _Edge(new Point(x4, y4), new Point(x1, y1)));
+  }
+  
+  // TODO: COMPENSATE FOR WORD WRAP
+  void slowText(String text) {
+    this.clear();
+    
+    Point center = new Point(5,5);
+    
+    printChar(x, y, String text, i) {
+      if(i == text.length - 1) {
+        _terminal.writeAt(x + i, y, text.substring(i));
+        this.render();
+      } else {
+        _terminal.writeAt(x + i, y, text.substring(i, i+1));
+        this.render();
+        new Timer(const Duration(milliseconds: 100), () => printChar(x, y, text, i+1));
+      }
+      
+    }
+    printChar(center.x, center.y, text, 0);
+        
+    this.render();
+  
+    
+//    new Timer(const Duration(milliseconds: 100), () => slowText(x,y,i+1));
+
+  }
+  
+  void clear() {
+    _terminal.clear();
+  }
+  
+  void render() {
+    _terminal.render();
   }
 
 }
