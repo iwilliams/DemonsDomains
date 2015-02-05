@@ -1,3 +1,5 @@
+library gfx;
+
 import 'package:malison/malison.dart';
 import 'dart:html' as html;
 import 'dart:math';

@@ -4,12 +4,14 @@
 import 'dart:html';
 
 //import 'package:lison/malison.dart';
-import 'package:piecemeal/piecemeal.dart';
-import 'dart:async';
-import 'dart:html';
+//import 'package:piecemeal/piecemeal.dart';
+//import 'dart:async';
+//import 'dart:html';
 import 'dart:collection';
 
-import 'gfx.dart';
+import "renderer.dart";
+import "gfx.dart";
+import "room.dart";
 
 void main() {
   // Create or query a <canvas> element to bind it to.
@@ -20,6 +22,11 @@ void main() {
       height = 50;
 
   var g = new Gfx(width, height);
+  var r = new Renderer(g);
+  
+  var room = new Room(["test"]);
+  
+  r.render(room);
 
   // Create a new terminal. CanvasTerminal uses your browser's fonts.
   // RetroTerminal uses a built in DOS-style Code Page 437 font.
