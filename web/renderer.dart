@@ -1,7 +1,8 @@
-library renderer;
+library dd.renderer;
 
 import 'gfx.dart';
 import 'room.dart';
+import 'ui.dart';
 
 class Renderer {
   
@@ -12,6 +13,8 @@ class Renderer {
   void render(Renderable o) {
     switch (o.runtimeType) {
       case Room :
+        break;
+      case Ui :
         break;
     }
   }

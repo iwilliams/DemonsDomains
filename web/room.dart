@@ -1,3 +1,5 @@
+library dd.room;
+
 import "renderer.dart";
 
 class Room implements Renderable {

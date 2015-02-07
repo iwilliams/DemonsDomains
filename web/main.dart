@@ -1,12 +1,8 @@
 // Copyright (c) 2015, <your name>. All rights reserved. Use of this source code
 // is governed by a BSD-style license that can be found in the LICENSE file.
+library dd;
 
 import 'dart:html';
-
-//import 'package:lison/malison.dart';
-//import 'package:piecemeal/piecemeal.dart';
-//import 'dart:async';
-//import 'dart:html';
 import 'dart:collection';
 
 import "renderer.dart";
@@ -127,40 +123,4 @@ void main() {
   // You can also draw individual glyphs -- character+color units.
 //  terminal.drawGlyph(3, 4, new Glyph.fromCharCode(CharCode.BLACK_HEART_SUIT, Color.RED, Color.BLACK));
 //
-//  terminal.drawGlyph(10, 10, new Glyph.fromCharCode(CharCode.PI, Color.AQUA));
-
-//  var testString = "Hello... Welcome to Demon's Dwelling...";
-//  void slowText(x, y, i) {
-//    if(i!=0) {
-//      x = x+1;
-//    }
-//
-//    terminal.writeAt(x, y, testString.substring(i, i+1));
-//    terminal.render();
-//
-//    if(i < testString.length -1){
-//      new Timer(const Duration(milliseconds: 100), () => slowText(x,y,i+1));
-//    }
-//  }
-//
-//  slowText(3, 7, 0);
-
-  // Use the rng
-//  var r = new Rng(23).vecInRect(new Rect(0, 10, 10, 10));
-//  terminal.writeAt(r.x, r.y, "X");
-
-  // When you're done drawing, tell it to render all of the changes. It renders
-  // in batches for performance.
-//  terminal.render();
-
-//  canvas.style.margin = "0 auto";
-//  canvas.style.top = '50%';
-//  canvas.style.left = '50%';
-//  canvas.style.position = 'absolute';
-//  canvas.style.marginLeft = (0 - canvas.clientWidth / 2).toString() + "px";
-//  canvas.style.marginTop = (0 - canvas.clientHeight / 2).toString() + "px";
-
-
-
-
 }
