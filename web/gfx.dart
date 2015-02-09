@@ -2,9 +2,10 @@ library gfx;
 
 import 'package:malison/malison.dart';
 import 'dart:html' as html;
-import 'dart:math';
 import 'dart:async';
-import 'dart:collection';
+
+import 'package:dd/geom/line.dart';
+import 'package:dd/geom/point.dart';
 
 class Gfx {
 
@@ -34,7 +35,7 @@ class Gfx {
 
   // TEST LINE FUNCTION IMPLEMENT THIS SOMEWHERE ELSE LOL; Also this was originall JS
   // http://www.codeproject.com/Articles/16564/Drawing-lines-in-Mozilla-based-browsers-and-the-In
-  void drawEdge(_Edge edge) {
+  void drawEdge(Line edge) {
 
     var x1 = edge.v1.x,
         y1 = edge.v1.y,
@@ -84,7 +85,7 @@ class Gfx {
   }
 
   void drawLine(x1, y1, x2, y2) {
-    drawEdge(new _Edge(new Point(x1, y1), new Point(x2, y2)));
+    drawEdge(new Line(new Point(x1, y1), new Point(x2, y2)));
   }
 
   void drawPolygon(List<Point> points, [bool fill]) {
@@ -96,20 +97,17 @@ class Gfx {
     }
 
     if (fill != null && fill) {
-
-      List<_Edge> sortedEdges = [];
-      sortedEdges = poly.edges;
-
+      List allEdges = poly.edges;      
     }
 
     return;
   }
 
   void drawRect(x1, y1, x2, y2, x3, y3, x4, y4) {
-    drawEdge(new _Edge(new Point(x1, y1), new Point(x2, y2)));
-    drawEdge(new _Edge(new Point(x2, y2), new Point(x3, y3)));
-    drawEdge(new _Edge(new Point(x3, y3), new Point(x4, y4)));
-    drawEdge(new _Edge(new Point(x4, y4), new Point(x1, y1)));
+    drawEdge(new Line(new Point(x1, y1), new Point(x2, y2)));
+    drawEdge(new Line(new Point(x2, y2), new Point(x3, y3)));
+    drawEdge(new Line(new Point(x3, y3), new Point(x4, y4)));
+    drawEdge(new Line(new Point(x4, y4), new Point(x1, y1)));
   }
   
   // TODO: COMPENSATE FOR WORD WRAP
@@ -148,58 +146,22 @@ class Gfx {
 
 }
 
-class _Edge implements Comparable {
-  Point _v1, _v2;
 
-  int _minY, _minYX, _maxY;
-  double _slope;
-
-
-  Point get v1 => this._v1;
-  Point get v2 => this._v2;
-  int get minY => this._minY;
-  int get minYX => this._minYX;
-  int get maxY => this._maxY;
-  double get slope => this._slope;
-
-  _Edge(Point v1, Point v2)
-      : this._v1 = v1,
-        this._v2 = v2 {
-
-    if (this._v1.y < this._v2.y) {
-      this._minY = _v1.y;
-      this._minYX = _v1.x;
-      this._maxY = _v2.y;
-    } else {
-      this._minY = _v2.y;
-      this._minYX = _v2.x;
-      this._maxY = _v1.y;
-    }
-
-    this._slope = (this._v1.y - this.v2.y) / (this._v1.x - this.v2.x);
-
-  }
-
-  int compareTo(_Edge) {
-    return 1;
-  }
-
-}
 
 class _Polygon {
 
-  List<_Edge> _edges = [];
+  List<Line> _edges = [];
 
-  List<_Edge> get edges => this._edges;
+  List<Line> get edges => this._edges;
 
   // Constructors
-  _Polygon.fromEdges(List<_Edge> edges) : this._edges = edges;
+  _Polygon.fromEdges(List<Line> edges) : this._edges = edges;
 
   _Polygon.fromPoints(List<Point> points) {
     for (var i = 0; i < points.length; i++) {
       Point v1 = points[i];
       Point v2 = (i < points.length - 1) ? points[i + 1] : points[0];
-      _edges.add(new _Edge(v1, v2));
+      _edges.add(new Line(v1, v2));
     }
   }
 

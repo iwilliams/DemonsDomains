@@ -1,4 +1,4 @@
-name: rouge
+name: dd
 version: 0.0.1
 description: An absolute bare-bones web app.
 environment:
@@ -6,3 +6,4 @@ environment:
 dependencies:
   browser: any
   malison: any
+  play_phaser: any

@@ -8,6 +8,8 @@ import 'dart:collection';
 import "renderer.dart";
 import "gfx.dart";
 import "room.dart";
+import "package:dd/geom/line.dart";
+import "package:dd/geom/point.dart";
 
 void main() {
   // Create or query a <canvas> element to bind it to.
@@ -84,7 +86,7 @@ void main() {
   Point leftBottomRight = frontBottomLeft;
   Point leftBottomLeft = new Point(0, height - 1);
 
-  g.drawPolygon([leftTopLeft, leftTopRight, leftBottomRight, leftBottomLeft], true);
+  g.drawPolygon([leftTopLeft, leftTopRight, leftBottomRight, leftBottomLeft]);
 
   // Top Wall
 
@@ -92,6 +94,8 @@ void main() {
   Point topTopRight = new Point(width - 1, 0);
   Point topBottomRight = frontTopRight;
   Point topBottomLeft = frontTopLeft;
+  
+  g.drawPolygon([topTopLeft, topTopRight, topBottomRight, topBottomLeft]);
 
   // Right Wall
   Point rightTopLeft = topBottomRight;
@@ -99,9 +103,9 @@ void main() {
   Point rightBottomRight = new Point(width - 1, height - 1);
   Point rightBottomLeft = frontBottomRight;
 
-  g.drawPolygon([rightTopLeft, rightTopRight, rightBottomRight, rightBottomLeft]);
+  g.drawPolygon([rightTopLeft, rightTopRight, rightBottomRight, rightBottomLeft],true);
 
-  g.drawPolygon([topTopLeft, topTopRight, topBottomRight, topBottomLeft]);
+  
 
 
   // Far door
